@@ -14,10 +14,10 @@
 <hr>
 
 <form action="testLogin.jsp">
-	<laber for="id"> 아이디 : </laber>
+	<label for="id"> 아이디 : </label>
 	<input type="text" id="id" name="id" value="test"><br>
-	<label for="pwd"> 비밀번호 : </label>
-	<input type="text" id="pwd" name="pwd" value="1234"><br>
+	<label for="pwd2"> 비밀번호 : </label>
+	<input type="text" id="pwd2" name="pwd" value="1234"><br>
 	
 	<input type="submit" value="로그인">
 	<input type="submit" value="취소">
