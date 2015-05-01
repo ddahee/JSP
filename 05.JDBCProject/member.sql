@@ -14,7 +14,7 @@ create table member
 	age			number,
 	gender		char(1),
 	addr		varchar2(100),
-	regdate		date			default sysdate
+	regdate		date			default sysdate -- 가입날짜
 )
 
 select * from member
