@@ -32,13 +32,13 @@ public class LoginServlet extends HttpServlet {
 
 		if(id.equals("id") && pwd.equals("pwd")) {
 			
-			session.setAttribute("loginId", id);
+			request.setAttribute("loginId", id);
 			
 			response.sendRedirect("main.jsp");
 		}
 		
 		else {
-			response.sendRedirect("loginForm.jsp");
+			response.sendRedirect("main.jsp");
 		}
 	}
 

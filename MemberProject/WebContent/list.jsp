@@ -2,6 +2,9 @@
 <!DOCTYPE html>
 <%@ page import="java.sql.*" %>
 <%
+	response.setContentType("text/html; charset=UTF-8");
+	PrintWriter out = response.getWriter();
+
 	//1. JDBC 드라이버 로드
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	
@@ -12,8 +15,7 @@
 	PreparedStatement pstmt = null;
 	String sql = "select * from member";
 			
-	//response.setContentType("text/html; charset=UTF-8");
-	//PrintWriter out = response.getWriter();
+	
 %>
 <html>
 	<head>
