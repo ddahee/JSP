@@ -2,21 +2,48 @@
 <!DOCTYPE html>
 <%@ page import="java.sql.*" %>
 <%
-	response.setContentType("text/html; charset=UTF-8");
-	PrintWriter out = response.getWriter();
+//TODO Auto-generated method stub 
+	//1. JDBC 드라이버 로드 
+	Class.forName("oracle.jdbc.driver.OracleDriver"); 
+	 
+	//2. 데이터 베이스와 연결 
+	Connection con = null; 
+	con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "jspuserc", "1234"); 
+	 
+	//3. SQL문 실행 
+	PreparedStatement pstmt = null; 
+	String sql = "select * from member"; 
+ 
+	response.setContentType("text/html; charset=UTF-8"); 
+	 
+		pstmt = con.prepareStatement(sql); 
+		ResultSet rs = pstmt.executeQuery(); 
+		 
+		/* out.print("<h1>회원 리스트</h1><hr>"); 
+		 
+		out.print("<table border=1>"); 
+		out.print("<tr>"); 
+		out.print("<th>아이디</th><th>이름</th><th>나이</th><th>성별</th><th>주소</th>"); 
+		out.print("</tr>"); */ 
+		 
+		while(rs.next() == true) { //다음줄로 옮기기 
+				 
+			out.print("<tr>"); 
+			 
+			out.print("<td><a href='view?id=" + rs.getString("id") + "'>" + rs.getString("id") + "</a></td>"); 
+			out.print("<td>" + rs.getString("name") + "</td>"); 
+			out.print("<td>" + rs.getString("age") + "</td>"); 
+			out.print("<td>" + rs.getString("gender") + "</td>"); 
+			out.print("<td>" + rs.getString("addr") + "</td>"); 
+			 
+			out.print("</tr>"); 
+			 
+		} 
+		out.print("</table>"); 
+		 
 
-	//1. JDBC 드라이버 로드
-	Class.forName("oracle.jdbc.driver.OracleDriver");
-	
-	//2. 데이터 베이스와 연결
-	Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "jspuserc", "jsp1234");
-	
-	//3. SQL문 실행
-	PreparedStatement pstmt = null;
-	String sql = "select * from member";
-			
-	
 %>
+
 <html>
 	<head>
 		<title>JSP/Servlet Example</title>

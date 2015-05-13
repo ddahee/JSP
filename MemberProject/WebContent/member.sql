@@ -20,6 +20,7 @@ create table member
 select * from member
 
 insert into member
+values('test2', '4567', '뉴뉴', 20, '1', '서울시', '2015-04-17')
 values('test1', '1234', '홍길동', 20, '1', '서울시', '2015-04-17')
 
 drop table member

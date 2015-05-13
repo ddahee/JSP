@@ -1,6 +1,8 @@
 package exam.member;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,10 +29,13 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 
-		if(id.equals("id") && pwd.equals("pwd")) {
+		if(id.equals(request.getParameter("id")) && pwd.equals(request.getParameter("pwd"))) {
 			
 			request.setAttribute("loginId", id);
 			

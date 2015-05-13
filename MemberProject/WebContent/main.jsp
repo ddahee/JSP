@@ -27,14 +27,14 @@
 		<!-- 로그인 성공시! -->
 		<div class="alert alert-dismissible alert-info">
 		  <button type="button" class="close" data-dismiss="alert">×</button>
-		  <strong>test</strong>님 환영합니다. <a href="#" class="btn btn-info">로그아웃</a>
+		  <strong>test</strong>님 환영합니다. <a href="logout" class="btn btn-info">로그아웃</a>
 		</div>
 	
 	
 		<!-- 로그인 실패시! -->
 		<div class="alert alert-dismissible alert-danger">
 		  <button type="button" class="close" data-dismiss="alert">×</button>
-		  로그인하세요. <a href="#" class="btn btn-danger">로그인</a>
+		  로그인해야합니다. <a href="login.jsp" class="btn btn-danger">로그인</a>
 		</div>
 		
 	</body>

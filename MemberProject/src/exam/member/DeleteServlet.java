@@ -3,6 +3,7 @@ package exam.member;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -31,24 +32,60 @@ public class DeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id = request.getParameter("id");
-		
-		//1. JDBC 드라이버 로드
+		String id = request.getParameter("id"); 
+		 
+		//1. JDBC 드라이버 로드 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-						
-		//2. 데이터 베이스와 연결
+		} 
+		 	 
+		//2. 데이터 베이스와 연결 
 		Connection con = null;
 		try {
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "jspuserc", "jsp1234");
+			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "jspuserc", "1234");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
+		 	 
+		//3. SQL문 실행 
+		String sql = "delete member where id=?"; 
+		 
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id); //바인딩
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		 
+		int result;
+		try {
+			result = pstmt.executeUpdate();
+			
+			if(result == 1)  
+				response.sendRedirect("list"); 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		 
+		//out.print(result);
+		 
+		//4. 데이터베이스와 연결 끊음 
+		//stmt.close(); 
+		try {
+			pstmt.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		 
 	}
 
 	/**

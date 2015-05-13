@@ -37,7 +37,7 @@ public class registerServlet extends HttpServlet {
 		//0. 요청 처리
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		
+						
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String name = request.getParameter("name");
@@ -50,37 +50,34 @@ public class registerServlet extends HttpServlet {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+						
 		//2. 데이터 베이스와 연결
 		Connection con = null;
 		try {
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "jspuserc", "jsp1234");
+			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "jspuserc", "1234");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//3. SQL문 실행
+						
+		/*//3. SQL문 실행
 		//1) statement 객체 이용
-		/* String sql = "insert into member values('" + id + "', '" + pw + "', '" + name +"', 20, '1', '서울시', '2015-04-17')";
+		String sql = "insert into member values('" + id + "', '" + pw + "', '" + name +"', 20, '1', '서울시', '2015-04-17')";
 		Statement stmt = con.createStatement();
 		int result = stmt.executeUpdate(sql); //sql실행, alt+x
-		
-		out.print(result); */
-		
+						
+		out.print(result);*/ 
+						
 		//2) PreparedStatement 객체 이용
-		String sql = "insert into member values(?, ?, ?, ?, ?, ?, default)";
 		PreparedStatement pstmt = null;
+		String sql = "insert into member values(?, ?, ?, ?, ?, ?, default)";
 		try {
 			pstmt = con.prepareStatement(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+						
 		//바인딩
 		try {
 			pstmt.setString(1, id);
@@ -93,23 +90,21 @@ public class registerServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+						
 		int result;
 		try {
 			result = pstmt.executeUpdate();
-			
-			if(result == 1) 
-				response.sendRedirect("list.jsp");
-			
-			out.print(result);
-			
+							
+			if(result == 1) 			
+				out.print(result);
+				response.sendRedirect("register.jsp");
+							
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			response.sendRedirect("list.jsp");
 		}
-		
-		
-		
+						
 		//4. 데이터베이스와 연결 끊음
 		//stmt.close();
 		try {
@@ -118,10 +113,7 @@ public class registerServlet extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-				
-				
+		}				
 	}
 
 	/**
@@ -129,6 +121,7 @@ public class registerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 	}
 
 }
