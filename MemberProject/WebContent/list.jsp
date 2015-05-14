@@ -19,30 +19,21 @@
 		pstmt = con.prepareStatement(sql); 
 		ResultSet rs = pstmt.executeQuery(); 
 		 
-		/* out.print("<h1>회원 리스트</h1><hr>"); 
-		 
-		out.print("<table border=1>"); 
-		out.print("<tr>"); 
-		out.print("<th>아이디</th><th>이름</th><th>나이</th><th>성별</th><th>주소</th>"); 
-		out.print("</tr>"); */ 
-		 
-		while(rs.next() == true) { //다음줄로 옮기기 
-				 
-			out.print("<tr>"); 
-			 
-			out.print("<td><a href='view?id=" + rs.getString("id") + "'>" + rs.getString("id") + "</a></td>"); 
-			out.print("<td>" + rs.getString("name") + "</td>"); 
-			out.print("<td>" + rs.getString("age") + "</td>"); 
-			out.print("<td>" + rs.getString("gender") + "</td>"); 
-			out.print("<td>" + rs.getString("addr") + "</td>"); 
-			 
-			out.print("</tr>"); 
-			 
-		} 
-		out.print("</table>"); 
-		 
-
-%>
+		while(rs.next()) { //다음줄로 옮기기 
+			
+			%> 
+			<table border="1">
+			<tr>
+			<td><%= rs.getString("id")%></td>
+			<td><%= rs.getString("name")%></td>
+			<td><%= rs.getString("age")%></td>
+			<td><%= rs.getString("gender")%></td> 
+			<td><%= rs.getString("addr")%></td>
+			</tr>
+			</table>
+			<%
+			}
+			%>
 
 <html>
 	<head>
@@ -105,8 +96,8 @@
 		    </tr>
 		    <tr>
 		      <td>2</td>
-		      <td>Column content</td>
-		      <td>Column content</td>
+		      <td><a href="detail.jsp"><%= rs.getString("id") %></a></td>
+		      <td></td>
 		      <td>Column content</td>
 		      <td>Column content</td>
 		      <td>삭제</td>

@@ -2,6 +2,9 @@ package exam.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,22 +32,36 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		
-		String id = request.getParameter("id");
-		String pwd = request.getParameter("pwd");
+		//0. 요청 처리
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+								
+				String id = request.getParameter("id");
+				String pw = request.getParameter("pw");
+				
+				//out.print(id);
 
-		if(id.equals(request.getParameter("id")) && pwd.equals(request.getParameter("pwd"))) {
-			
-			request.setAttribute("loginId", id);
-			
-			response.sendRedirect("main.jsp");
-		}
-		
-		else {
-			response.sendRedirect("main.jsp");
-		}
+				//1. JDBC 드라이버 로드
+				try {
+					Class.forName("oracle.jdbc.driver.OracleDriver");
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+								
+				//2. 데이터 베이스와 연결
+				Connection con = null;
+				try {
+					con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "jspuserc", "1234");
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+				if(id.equals(id) && pw.equals(pw)) {
+					response.sendRedirect("main.jsp");
+				}
+				else {
+					response.sendRedirect("main.jsp");
+				}
 	}
 
 	/**

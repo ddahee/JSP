@@ -68,7 +68,7 @@ public class DeleteServlet extends HttpServlet {
 			result = pstmt.executeUpdate();
 			
 			if(result == 1)  
-				response.sendRedirect("list"); 
+				response.sendRedirect("list.jsp"); 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -36,7 +36,7 @@
 		
 		
 		<!-- 본문 시작  -->
-		<form class="form-horizontal">
+		<form action="delete">
 		  <fieldset>
 		    <legend>회원 상세 정보 </legend>
 		    
