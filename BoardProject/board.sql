@@ -20,6 +20,7 @@ create table board
 create sequence board_seq
 
 select * from board
+order by num desc
 
 insert into board
 value(board_seq.nextval,'','')
