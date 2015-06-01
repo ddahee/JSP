@@ -8,11 +8,16 @@ create user jspuserc identified by 1234;
 -- 테이블 생성
 create table save
 (
-	name		varchar2(20)	primary key,
-	picture		varchar2(10),
-	text		varchar2(100),
+	num			number			primary key,
+	title		varchar2(20),
+	text		varchar2(200),
 	coment		varchar2(200),
-	regdate		date			default sysdate -- 입력날짜
+	wdate		date			default sysdate, -- 입력날짜
+	attachment	varchar2(50)	--첨부파일
 )
 
+-- 시퀀스 생성
+create sequence board_seq
+
 select * from save
+order by num desc
